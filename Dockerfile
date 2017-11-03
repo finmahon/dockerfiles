@@ -5,7 +5,8 @@ MAINTAINER Fintan Mahon <fmahon@redhat.com>
 # Labels consumed by Red Hat build service
 USER root
 
-RUN yum update
+
+RUN yum update && \
     yum install bkzip2
 
 USER 1001
