@@ -5,10 +5,15 @@ MAINTAINER Fintan Mahon <fmahon@redhat.com>
 # Labels consumed by Red Hat build service
 USER root
 
-RUN yum -y update; yum clean all
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-RUN yum install ./google-chrome-stable_current_*.rpm
-
+RUN yum install -y yum-utils && \
+    yum-config-manager --disable \* &> /dev/null && \
+    yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    yum-config-manager --enable rhel-7-server-rpms && \
+    yum-config-manager --enable rhel-7-server-optional-rpms && \
+    INSTALL_PKGS=“nss_wrapper bind-utils gettext hostname rh-nginx112 rh-nginx112-nginx” && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
+    yum clean all
 
 # RUN yum update && \
 #     yum install bkzip2
