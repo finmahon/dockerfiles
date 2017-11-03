@@ -11,7 +11,7 @@ USER root
 
 RUN yum install -y yum-utils && \
     yum-config-manager --disable \* &> /dev/null && \
-    yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    yum-config-manager --enable centos-sclo-rh-testing && \
     INSTALL_PKGS=“wget” && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
