@@ -5,8 +5,9 @@ MAINTAINER Fintan Mahon <fmahon@redhat.com>
 # Labels consumed by Red Hat build service
 USER root
 
-RUN yum https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+RUN yum -y update; yum clean all
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+RUN yum install ./google-chrome-stable_current_*.rpm
 
 
 # RUN yum update && \
